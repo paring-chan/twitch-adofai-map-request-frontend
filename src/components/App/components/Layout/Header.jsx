@@ -26,11 +26,15 @@ const AppLayoutHeader = () => {
                     <Modal.Body>
                         <Form.Group controlId="formTitle">
                             <Form.Label>맵 제목</Form.Label>
-                            <Form.Control readOnly={processing} required type="text"/>
+                            <Form.Control readOnly={processing} required type="text" name="title"/>
                         </Form.Group>
                         <Form.Group controlId="formURL">
                             <Form.Label>맵 링크</Form.Label>
-                            <Form.Control type="url" required readOnly={processing}/>
+                            <Form.Control type="url" required readOnly={processing} name="link"/>
+                        </Form.Group>
+                        <Form.Group controlId="formURL">
+                            <Form.Label>포럼 레벨(선택)</Form.Label>
+                            <Form.Control type="number" name="forumLevel" min={1} max={20} readOnly={processing}/>
                         </Form.Group>
                     </Modal.Body>
                     <Modal.Footer>

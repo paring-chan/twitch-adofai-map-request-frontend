@@ -56,7 +56,6 @@ export default class App extends React.Component {
             this.twitch.onAuthorized((auth) => {
                 this.Authentication.setToken(auth.token, auth.userId)
                 if (!this.state.finishedLoading) {
-                    console.log(auth.token)
                     axios.defaults.headers.Authorization = `Bearer ${auth.token}`
                     this.socket = io.connect(API_URL, {
                         query: {
