@@ -7,6 +7,7 @@ import './App.css'
 import AppLayout from "./components/Layout";
 import io from 'socket.io-client'
 import axios from "axios";
+import Map from "./components/Map";
 
 const API_URL = 'https://8081.test.pikodev.me'
 
@@ -97,13 +98,21 @@ export default class App extends React.Component {
                 <div className="App">
                     <div className={this.state.theme === 'light' ? 'App-light' : 'App-dark'}>
                         <AppLayout>
-                            <div className="container">
+                            <div className="container d-flex flex-column pb-5 flex-grow-1">
                                 <div className="mt-4">
                                     <h2 className="text-center">현재 맵: ㅁㄴㅇㄻㄴㅇㄹ</h2>
                                 </div>
-                                <div className="mt-4">
+                                <div className="mt-4 flex-grow-1 d-flex flex-column">
                                     <h4>대기중인 추천맵 목록</h4>
-                                    {JSON.stringify(this.state.maps)}
+                                    <div style={{
+                                        overflowY: 'visible',
+                                    }} className="flex-grow-1">
+                                        <div className="d-flex flex-column" style={{
+                                            gap: 10
+                                        }}>
+                                            {this.state.maps.map(map => <Map dark={this.state.theme === 'dark'} map={map} key={map._id}/>)}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </AppLayout>
@@ -116,6 +125,5 @@ export default class App extends React.Component {
                 </div>
             )
         }
-
     }
 }

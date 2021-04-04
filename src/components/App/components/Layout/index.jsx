@@ -6,7 +6,9 @@ import AppLayoutHeader from "./Header";
  */
 const AppLayout = ({children}) => {
     return (
-        <div>
+        <div style={{
+            height: '100vh'
+        }} className="d-flex flex-column">
             <AppLayoutHeader/>
             {children}
         </div>
