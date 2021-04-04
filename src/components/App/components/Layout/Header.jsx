@@ -41,7 +41,7 @@ const AppLayoutHeader = () => {
                             <Form.Label>맵 링크</Form.Label>
                             <Form.Control type="url" required readOnly={processing} name="link"/>
                         </Form.Group>
-                        <Form.Group controlId="formURL">
+                        <Form.Group controlId="formLvl">
                             <Form.Label>포럼 레벨(선택)</Form.Label>
                             <Form.Control type="number" name="forumLevel" min={1} max={20} readOnly={processing}/>
                         </Form.Group>
