@@ -8,8 +8,7 @@ import AppLayout from "./components/Layout";
 import io from 'socket.io-client'
 import axios from "axios";
 import Map from "./components/Map";
-
-const API_URL = 'https://8081.test.pikodev.me'
+import {API_URL} from "./constants";
 
 export default class App extends React.Component {
     constructor(props) {

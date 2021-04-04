@@ -1,5 +1,7 @@
 import React from 'react';
 import {Button, Form, Modal, Navbar} from "react-bootstrap";
+import axios from "axios";
+import {API_URL} from "../../constants";
 
 const AppLayoutHeader = () => {
     const [modalShow, setModalShow] = React.useState(false)
@@ -22,6 +24,13 @@ const AppLayoutHeader = () => {
                 <Form onSubmit={event => {
                     event.preventDefault()
                     setProcessing(true)
+                    const data = new FormData(event.target)
+                    const obj = {}
+                    data.forEach((v, k) => obj[k] = v)
+                    axios.post(`${API_URL}/request`, obj).catch(() => null).then(() => {
+                        setProcessing(false)
+                        setModalShow(false)
+                    })
                 }}>
                     <Modal.Body>
                         <Form.Group controlId="formTitle">
