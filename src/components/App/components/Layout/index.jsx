@@ -1,6 +1,9 @@
 import React from 'react';
 import AppLayoutHeader from "./Header";
 
+const params = new URLSearchParams(window.location.search)
+const live = params.get('live')
+
 /**
  * @type {React.FC}
  */
@@ -9,7 +12,7 @@ const AppLayout = ({children}) => {
         <div style={{
             height: '100vh'
         }} className="d-flex flex-column">
-            <AppLayoutHeader/>
+            {!live && <AppLayoutHeader/>}
             {children}
         </div>
     );
