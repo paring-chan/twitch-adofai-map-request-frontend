@@ -39,15 +39,15 @@ const Map = ({map, dark, mod}) => {
                     <Modal.Body>
                         <Form.Group controlId={`${map._id}_title`}>
                             <Form.Label>맵 제목</Form.Label>
-                            <Form.Control readOnly={!mod || processing} required type="text" name="title" value={map.title}/>
+                            <Form.Control readOnly={!mod || processing} required type="text" name="title" defaultValue={map.title}/>
                         </Form.Group>
                         <Form.Group controlId={`${map._id}_link`}>
                             <Form.Label>맵 링크</Form.Label>
-                            <Form.Control type="url" required readOnly={!mod || processing} value={map.link} name="link"/>
+                            <Form.Control type="url" required readOnly={!mod || processing} defaultValue={map.link} name="link"/>
                         </Form.Group>
                         <Form.Group controlId={`${map._id}_lvl`}>
                             <Form.Label>포럼 레벨</Form.Label>
-                            <Form.Control type="number" name="forumLevel" min={1} max={20} value={map.lvl} readOnly={!mod || processing}/>
+                            <Form.Control type="number" name="forumLevel" min={1} max={20} defaultValue={map.lvl} readOnly={!mod || processing}/>
                         </Form.Group>
                     </Modal.Body>
                     {
@@ -55,7 +55,7 @@ const Map = ({map, dark, mod}) => {
                             <Button type="button" onClick={() => setShow(false)} variant="secondary">닫기</Button>
                             <Button type="button" variant="danger" onClick={() => {
                                 setProcessing(true)
-                                axios.delete(API_URL + '/requests/' + map._id).catch(console.error).then(()=>{
+                                axios.delete(API_URL + '/request/' + map._id).catch(console.error).then(()=>{
                                     setProcessing(false)
                                     setShow(false)
                                 })
