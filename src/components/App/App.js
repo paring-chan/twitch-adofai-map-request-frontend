@@ -103,7 +103,8 @@ export default class App extends React.Component {
                         <AppLayout>
                             <div className="container d-flex flex-column pb-5 flex-grow-1">
                                 <div className="mt-4">
-                                    <h2 className="text-center">현재 맵: {this.state.current || '없음'} </h2>
+                                    <h2 className="text-center">현재 맵</h2>
+                                    {this.state.current ? <Map map={this.state.current} dark={this.state.theme === 'dark'}/> : <h5 className="text-center">진행중인 맵이 없습니다.</h5>}
                                 </div>
                                 <div className="mt-4 flex-grow-1 d-flex flex-column">
                                     <h4>대기중인 추천맵 목록</h4>
