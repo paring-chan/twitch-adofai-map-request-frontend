@@ -1,6 +1,6 @@
 import React from 'react'
 import Authentication from '../../util/Authentication/Authentication'
-
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
 export default class App extends React.Component{
