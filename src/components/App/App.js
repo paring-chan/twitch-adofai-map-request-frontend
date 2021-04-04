@@ -5,6 +5,9 @@ import Authentication from '../../util/Authentication/Authentication'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 import AppLayout from "./components/Layout";
+import io from 'socket.io-client'
+
+const API_URL = 'https://8081.test.pikodev.me'
 
 export default class App extends React.Component {
     constructor(props) {
@@ -42,6 +45,11 @@ export default class App extends React.Component {
                 this.Authentication.setToken(auth.token, auth.userId)
                 if (!this.state.finishedLoading) {
                     console.log(auth.token)
+                    this.socket = io.connect(API_URL, {
+                        query: {
+                            auth: auth.token
+                        },
+                    })
                     this.setState(() => {
                         return {finishedLoading: true}
                     })
