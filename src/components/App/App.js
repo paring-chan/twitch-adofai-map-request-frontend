@@ -41,9 +41,7 @@ export default class App extends React.Component {
             this.twitch.onAuthorized((auth) => {
                 this.Authentication.setToken(auth.token, auth.userId)
                 if (!this.state.finishedLoading) {
-                    // if the component hasn't finished loading (as in we've not set up after getting a token), let's set it up now.
-
-                    // now we've done the setup for the component, let's set the state to true to force a rerender with the correct data.
+                    console.log(auth.token)
                     this.setState(() => {
                         return {finishedLoading: true}
                     })
@@ -52,10 +50,6 @@ export default class App extends React.Component {
 
             this.twitch.listen('broadcast', (target, contentType, body) => {
                 this.twitch.rig.log(`New PubSub message!\n${target}\n${contentType}\n${body}`)
-                // now that you've got a listener, do something with the result... 
-
-                // do something...
-
             })
 
             this.twitch.onVisibilityChanged((isVisible, _c) => {
@@ -80,6 +74,9 @@ export default class App extends React.Component {
                 <div className="App">
                     <div className={this.state.theme === 'light' ? 'App-light' : 'App-dark'}>
                         <AppLayout>
+                            <div className="mt-4">
+                                <h2 className="text-center">현재 맵: ㅁㄴㅇㄻㄴㅇㄹ</h2>
+                            </div>
                             {/*<p>Hello world!</p>*/}
                             {/*<p>My token is: {this.Authentication.state.token}</p>*/}
                             {/*<p>My opaque ID is {this.Authentication.getOpaqueId()}.</p>*/}

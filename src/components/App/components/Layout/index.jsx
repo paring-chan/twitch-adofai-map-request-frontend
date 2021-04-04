@@ -1,4 +1,5 @@
 import React from 'react';
+import AppLayoutHeader from "./Header";
 
 /**
  * @type {React.FC}
@@ -6,7 +7,7 @@ import React from 'react';
 const AppLayout = ({children}) => {
     return (
         <div>
-            asdf
+            <AppLayoutHeader/>
             {children}
         </div>
     );
