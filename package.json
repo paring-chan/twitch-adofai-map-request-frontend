@@ -37,6 +37,7 @@
     "webpack-dev-server": "^3.9.0"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "core-js": "^3.5.0",
     "jsonwebtoken": "^8.5.1",

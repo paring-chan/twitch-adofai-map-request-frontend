@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 import AppLayout from "./components/Layout";
 import io from 'socket.io-client'
+import axios from "axios";
 
 const API_URL = 'https://8081.test.pikodev.me'
 
@@ -19,8 +20,15 @@ export default class App extends React.Component {
         this.state = {
             finishedLoading: false,
             theme: 'light',
-            isVisible: true
+            isVisible: true,
+            maps: []
         }
+    }
+
+    loadMaps() {
+        return axios.get(`${API_URL}/requests`).then(res => {
+            this.setState({maps: res.data})
+        })
     }
 
     contextUpdate(context, delta) {
@@ -45,13 +53,16 @@ export default class App extends React.Component {
                 this.Authentication.setToken(auth.token, auth.userId)
                 if (!this.state.finishedLoading) {
                     console.log(auth.token)
+                    axios.defaults.headers.Authorization = `Bearer ${auth.token}`
                     this.socket = io.connect(API_URL, {
                         query: {
                             auth: auth.token
                         },
                     })
-                    this.setState(() => {
-                        return {finishedLoading: true}
+                    this.loadMaps().then(() => {
+                        this.setState(() => {
+                            return {finishedLoading: true}
+                        })
                     })
                 }
             })
@@ -82,18 +93,15 @@ export default class App extends React.Component {
                 <div className="App">
                     <div className={this.state.theme === 'light' ? 'App-light' : 'App-dark'}>
                         <AppLayout>
-                            <div className="mt-4">
-                                <h2 className="text-center">현재 맵: ㅁㄴㅇㄻㄴㅇㄹ</h2>
+                            <div className="container">
+                                <div className="mt-4">
+                                    <h2 className="text-center">현재 맵: ㅁㄴㅇㄻㄴㅇㄹ</h2>
+                                </div>
+                                <div className="mt-4">
+                                    <h4>대기중인 추천맵 목록</h4>
+                                    {JSON.stringify(this.state.maps)}
+                                </div>
                             </div>
-                            {/*<p>Hello world!</p>*/}
-                            {/*<p>My token is: {this.Authentication.state.token}</p>*/}
-                            {/*<p>My opaque ID is {this.Authentication.getOpaqueId()}.</p>*/}
-                            {/*<div>{this.Authentication.isModerator() ?*/}
-                            {/*    <p>I am currently a mod, and here's a special mod button <input value='mod button'*/}
-                            {/*                                                                    type='button'/>*/}
-                            {/*    </p> : 'I am currently not a mod.'}</div>*/}
-                            {/*<p>I*/}
-                            {/*    have {this.Authentication.hasSharedId() ? `shared my ID, and my user_id is ${this.Authentication.getUserId()}` : 'not shared my ID'}.</p>*/}
                         </AppLayout>
                     </div>
                 </div>
