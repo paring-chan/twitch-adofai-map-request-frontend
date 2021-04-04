@@ -59,6 +59,9 @@ export default class App extends React.Component {
                             auth: auth.token
                         },
                     })
+                    this.socket.on('reload', () => {
+                        this.loadMaps()
+                    })
                     this.loadMaps().then(() => {
                         this.setState(() => {
                             return {finishedLoading: true}
