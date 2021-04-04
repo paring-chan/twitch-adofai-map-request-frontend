@@ -35,11 +35,6 @@ module.exports = (_env,argv)=> {
       outputHtml:"live_config.html",
       build:true
     },
-    Mobile:{
-      path:"./src/Mobile.js",
-      outputHtml:"mobile.html",
-      build:true
-    }
   }
 
   let entry = {}
@@ -113,9 +108,10 @@ module.exports = (_env,argv)=> {
       headers: {
         'Access-Control-Allow-Origin': '*'
       },
-      port: 8080
+      port: 8080,
+      disableHostCheck: true
     }
-    config.devServer.https = true
+    config.devServer.https = false
   }
   if(argv.mode==='production'){
     config.optimization.splitChunks={
