@@ -1,3 +1,4 @@
+const fs = require('fs')
 const path = require("path")
 const webpack = require("webpack")
 
@@ -9,9 +10,19 @@ const bundlePath = path.resolve(__dirname, "dist/")
 
 module.exports = (_env,argv)=> {
   let entryPoints = {
+    VideoComponent:{
+      path:"./src/VideoComponent.js",
+      outputHtml:"video_component.html",
+      build:true
+    },
     VideoOverlay:{
       path:"./src/VideoOverlay.js",
       outputHtml:"video_overlay.html",
+      build:true
+    },
+    Panel:{
+      path:"./src/Panel.js",
+      outputHtml:"panel.html",
       build:true
     },
     Config:{
@@ -24,6 +35,11 @@ module.exports = (_env,argv)=> {
       outputHtml:"live_config.html",
       build:true
     },
+    Mobile:{
+      path:"./src/Mobile.js",
+      outputHtml:"mobile.html",
+      build:true
+    }
   }
 
   let entry = {}
@@ -97,10 +113,9 @@ module.exports = (_env,argv)=> {
       headers: {
         'Access-Control-Allow-Origin': '*'
       },
-      port: 8080,
-      disableHostCheck: true
+      port: 8080
     }
-    config.devServer.https = false
+    config.devServer.https = true
   }
   if(argv.mode==='production'){
     config.optimization.splitChunks={
